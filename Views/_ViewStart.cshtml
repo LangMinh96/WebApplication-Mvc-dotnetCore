@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using WebApplication1.Data
+
+@inject IAuthorizationService authorizationService
+
+@{
+    if(User.IsInRole(RoleName.Administrator) && User.IsInRole(RoleName.Editor)){
+        // Thư viện Js cho admin and editor
+        Layout = "_Layout";
+    }
+    if(User.IsInRole(RoleName.Member)){
+        Layout = "_LayoutUser";
+    }
+}
+

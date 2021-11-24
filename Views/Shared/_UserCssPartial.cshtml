@@ -1,0 +1,32 @@
+@using Microsoft.AspNetCore.Authorization
+@using WebApplication1.Data
+
+@inject IAuthorizationService authorizationService
+
+@{
+    if(User.IsInRole(RoleName.Administrator) && User.IsInRole(RoleName.Editor)){
+        // Thư viện css cho admin and editor
+    }
+    if(User.IsInRole(RoleName.Member)){
+        // Thư viện css cho member
+        <!-- CSS here -->
+        <link rel="stylesheet" href="~/user/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/user/assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="~/user/assets/css/flaticon.css">
+        <link rel="stylesheet" href="~/user/assets/css/price_rangs.css">
+        <link rel="stylesheet" href="~/user/assets/css/slicknav.css">
+        <link rel="stylesheet" href="~/user/assets/css/animate.min.css">
+        <link rel="stylesheet" href="~/user/assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="~/user/assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="~/user/assets/css/themify-icons.css">
+        <link rel="stylesheet" href="~/user/assets/css/slick.css">
+        <link rel="stylesheet" href="~/user/assets/css/nice-select.css">
+        <link rel="stylesheet" href="~/user/assets/css/style.css">
+        <style>
+            .img-logo{
+                max-width: 80px;
+            }
+        </style>
+    }
+}
+

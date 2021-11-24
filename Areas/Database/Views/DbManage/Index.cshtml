@@ -1,0 +1,60 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using System.Data
+
+@inject AppDbContext dbContext;
+
+@{
+    ViewData["Title"] = "Thông tin cơ sở dữ liệu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var connect = dbContext.Database.GetDbConnection();
+    var dbName = connect.Database;
+    var can_Connect = dbContext.Database.CanConnect();
+
+}
+
+<partial name="_AlertMessage"></partial>
+
+<h1>Thông tin cơ sở dữ liệu</h1>
+<p>- Database: @dbName</p>
+<p>- Data Source: @connect.DataSource</p>
+<p>- Status: @connect.State</p>
+<hr/>
+<h2>Migration</h2>
+@{
+
+    foreach(var migartion in dbContext.Database.GetAppliedMigrations()){
+        <p>@migartion</p>
+    }
+    foreach(var migration in dbContext.Database.GetPendingMigrations()){
+        <p>@migration (pending)</p>
+    }
+    <hr />
+    if(!can_Connect){
+        <a class="alter alter-danger">Không có khả năng kết nối đến database</a>
+    }
+    if(dbContext.Database.GetPendingMigrations().Any())
+    {
+        <br/>
+        <form method="post">
+            <button class="btn btn-success" type="submit" asp-action="Migrate"> Tạo mới database (Cập nhật migration)</button>
+        </form>
+        
+    }
+
+    if (can_Connect)
+    {
+        <h2>Thông tin các bảng</h2>
+        await dbContext.Database.OpenConnectionAsync();
+        var table = dbContext.Database.GetDbConnection().GetSchema("Tables");
+        <ul>
+            @foreach(System.Data.DataRow row in table.Rows)
+            {
+                <li>@row["TABLE_NAME"] </li>
+            }
+        </ul>
+    <hr />
+    <a class="btn btn-danger" asp-action="DeleteDb" asp-controller="DbManage" asp-area="Database">Xóa database @dbName</a>
+    <a class="btn btn-primary" asp-action="SeedData" asp-controller="DbManage" asp-area="Database">Seed Data</a>
+    }
+}
