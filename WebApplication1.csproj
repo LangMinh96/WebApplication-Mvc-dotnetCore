@@ -46,6 +46,8 @@
     <Folder Include="Areas\Database\Data\" />
     <Folder Include="Areas\Database\Models\" />
     <Folder Include="Areas\Identity\Data\" />
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Shared\Admin\" />
   </ItemGroup>
 
 </Project>

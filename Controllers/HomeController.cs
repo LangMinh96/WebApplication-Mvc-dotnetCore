@@ -25,7 +25,7 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(this.User);
+            /*var user = await _userManager.GetUserAsync(this.User);
             var role = _userManager.GetRolesAsync(user);
 
             var result = role.Result.FirstOrDefault();
@@ -34,7 +34,7 @@ namespace WebApplication1.Controllers
             {
                 return View("UserIndex");
             }
-            //var result = 
+            //var result = */
 
             return View();
         }
