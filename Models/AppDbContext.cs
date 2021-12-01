@@ -31,8 +31,12 @@ namespace WebApplication1.Models
                     entityType.SetTableName(tableName.Substring(6));
                 }
             }
-
+            // Tạo Index cho cột Slug bảng Category
+            modelBuilder.Entity<Category>(entity => {
+                entity.HasIndex(p => p.Slug);
+            });
         }
         public DbSet<ContactModel> Contacts { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
